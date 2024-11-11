@@ -168,7 +168,7 @@ class DetailScreen extends StatelessWidget {
                     const SizedBox(
                       height: 16,
                     ),
-                    Text(
+                    const Text(
                       'Galeri',
                       style: TextStyle(
                         fontSize: 16,

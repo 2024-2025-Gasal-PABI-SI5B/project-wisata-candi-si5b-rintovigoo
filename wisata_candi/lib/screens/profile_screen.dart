@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -9,10 +10,24 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   //TODO:1. Deklarasikan Variabel yang kita butuhkan
-  bool isSignedIn = true;
+  bool isSignedIn = false;
   String fullName = 'Rinto Vigo';
-  String userName = '';
+  String userName = 'Vigo';
   int favoriteCandiCount = 0;
+
+  //TODO: 5. Implementasi Fungis Sign In
+  void signIn() {
+    setState(() {
+      isSignedIn = !isSignedIn;
+    });
+  }
+
+  //TODO: 6. Implementasi Fungsi Sign Out
+  void signOut() {
+    setState(() {
+      isSignedIn = !isSignedIn;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,6 +76,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
                 //TODO: 3. Profile Info (isinya info profil)
+                //baris 1 profile info
                 const SizedBox(
                   height: 20,
                 ),
@@ -94,11 +110,102 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     Expanded(
                         child: Text(
                       ': $userName',
-                      style: TextStyle(fontSize: 18),
-                    ))
+                      style: const TextStyle(fontSize: 18),
+                    )),
+                  ],
+                ),
+                //baris 2 nama pengguna
+                const SizedBox(
+                  height: 4,
+                ),
+                Divider(
+                  color: Colors.deepPurple[100],
+                ),
+                const SizedBox(
+                  height: 4,
+                ),
+                Row(
+                  children: [
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width / 3,
+                      child: const Row(
+                        children: [
+                          Icon(
+                            Icons.person,
+                            color: Colors.blue,
+                          ),
+                          SizedBox(
+                            width: 8,
+                          ),
+                          Text(
+                            'Nama',
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold),
+                          )
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                        child: Text(
+                      ': $fullName',
+                      style: const TextStyle(fontSize: 18),
+                    )),
+                    if (isSignedIn) const Icon(Icons.edit),
+                  ],
+                ),
+                //baris 3 Favorit
+                const SizedBox(
+                  height: 4,
+                ),
+                Divider(
+                  color: Colors.deepPurple[100],
+                ),
+                const SizedBox(
+                  height: 4,
+                ),
+                Row(
+                  children: [
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width / 3,
+                      child: const Row(
+                        children: [
+                          Icon(
+                            Icons.favorite,
+                            color: Colors.red,
+                          ),
+                          SizedBox(
+                            width: 8,
+                          ),
+                          Text(
+                            'Favorite',
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold),
+                          )
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                        child: Text(
+                      ': $favoriteCandiCount',
+                      style: const TextStyle(fontSize: 18),
+                    )),
                   ],
                 ),
                 //TODO: 4. Profile Action (isinya tombol sign in/sign out)
+                const SizedBox(
+                  height: 4,
+                ),
+                Divider(
+                  color: Colors.deepPurple[100],
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                isSignedIn
+                    ? TextButton(
+                        onPressed: signOut, child: const Text('Sign Out'))
+                    : TextButton(
+                        onPressed: signIn, child: const Text('Sign In'))
               ],
             ),
           ),
